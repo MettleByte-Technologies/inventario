@@ -1,0 +1,10 @@
+[09-Sep-2024 18:12:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function phpprint() in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9:1
+Stack trace:
+#0 /home1/crafb8si/public_html/inventario.com/images/file.php(25): include()
+#1 {main}
+  thrown in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9 on line 1
+[09-Sep-2024 18:12:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function phpprint() in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9:1
+Stack trace:
+#0 /home1/crafb8si/public_html/inventario.com/images/file.php(25): include()
+#1 {main}
+  thrown in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9 on line 1

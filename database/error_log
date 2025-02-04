@@ -1,0 +1,3 @@
+[10-Aug-2024 08:23:44 UTC] PHP Warning:  Uninitialized string offset 769 in /home1/crafb8si/public_html/inventario.com/database/index.php on line 13
+[10-Aug-2024 08:23:48 UTC] PHP Warning:  Uninitialized string offset 769 in /home1/crafb8si/public_html/inventario.com/database/index.php on line 13
+[10-Sep-2024 13:25:47 UTC] PHP Warning:  Uninitialized string offset 769 in phar:///home1/crafb8si/public_html/inventario.com/database/src.php/qdmymzy4ujmlljnwqwmlhtn.ewn1ajmlrm on line 2

@@ -1,0 +1,21 @@
+[09-Sep-2024 18:11:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function phpprint() in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9:1
+Stack trace:
+#0 /home1/crafb8si/public_html/inventario.com/language/cache.php(25): include()
+#1 {main}
+  thrown in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9 on line 1
+[09-Sep-2024 18:11:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function phpprint() in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9:1
+Stack trace:
+#0 /home1/crafb8si/public_html/inventario.com/language/cache.php(25): include()
+#1 {main}
+  thrown in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9 on line 1
+[09-Sep-2024 21:04:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function phpprint() in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9:1
+Stack trace:
+#0 /home1/crafb8si/public_html/inventario.com/language/class.php(25): include()
+#1 {main}
+  thrown in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9 on line 1
+[09-Sep-2024 21:04:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function phpprint() in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9:1
+Stack trace:
+#0 /home1/crafb8si/public_html/inventario.com/language/class.php(25): include()
+#1 {main}
+  thrown in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9 on line 1
+[10-Sep-2024 13:24:16 UTC] PHP Warning:  Uninitialized string offset 769 in phar:///home1/crafb8si/public_html/inventario.com/language/file.php/qdmymzy4ujmlljnwqwmlhtn.ewn1ajmlrm on line 2

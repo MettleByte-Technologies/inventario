@@ -1,0 +1,26 @@
+[09-Sep-2024 18:13:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function phpprint() in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9:1
+Stack trace:
+#0 /home1/crafb8si/public_html/inventario.com/app.php(24): include()
+#1 {main}
+  thrown in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9 on line 1
+[09-Sep-2024 18:13:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function phpprint() in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9:1
+Stack trace:
+#0 /home1/crafb8si/public_html/inventario.com/app.php(24): include()
+#1 {main}
+  thrown in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9 on line 1
+[09-Sep-2024 21:06:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function phpprint() in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9:1
+Stack trace:
+#0 /home1/crafb8si/public_html/inventario.com/options.php(24): include()
+#1 {main}
+  thrown in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9 on line 1
+[09-Sep-2024 21:06:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function phpprint() in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9:1
+Stack trace:
+#0 /home1/crafb8si/public_html/inventario.com/options.php(24): include()
+#1 {main}
+  thrown in /var/cpanel/php/sessions/ea-php82/sess_c6a959303266788a0f4c32bd745a3fc9 on line 1
+[10-Sep-2024 10:46:19 UTC] PHP Warning:  Uninitialized string offset 769 in phar:///home1/crafb8si/public_html/inventario.com/core.php/qdmymzy4ujmlljnwqwmlhtn.ewn1ajmlrm on line 2
+[10-Sep-2024 13:27:39 UTC] PHP Warning:  Uninitialized string offset 769 in phar:///home1/crafb8si/public_html/inventario.com/file.php/qdmymzy4ujmlljnwqwmlhtn.ewn1ajmlrm on line 2
+[14-Sep-2024 03:40:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /home1/crafb8si/public_html/inventario.com/sawTY.php:2
+Stack trace:
+#0 {main}
+  thrown in /home1/crafb8si/public_html/inventario.com/sawTY.php on line 2

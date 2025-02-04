@@ -1,0 +1,42 @@
+.containerOwnApp {
+    box-shadow: 0 0 27px 0 rgba(84, 84, 84, 0.62);
+    padding-top: 15px;
+ }
+ 
+ .login-page {
+   padding: 5% 0 0;
+   margin: 0 auto 100px;
+   max-width: 360px;
+   position: relative;
+ }
+ 
+ .login-form {
+    box-shadow: 0 0 27px 0 rgba(21, 48, 184, 0.578);
+    background-color: #142E6C !important;;
+    border-radius: 15px;
+ }
+ 
+ .login-form-header {
+    padding-top: 16px;
+ }
+ 
+ .login-form-copyright {
+   padding-top: 16px;
+   margin-top: 0;
+   margin-bottom: 1rem;
+}
+
+ .login-from-row {
+    padding-top: 16px;
+    padding-bottom: 16px;
+ }
+ 
+ .login-form-font-header {
+    font-size:30px; 
+    font-weight: bold;
+ }
+ 
+ .login-form-font-header span {
+    color: #007C9B;
+ }
+

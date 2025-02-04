@@ -1,0 +1,52 @@
+ .title-section1{
+   font-size: 2em;
+   color: red;
+   padding-bottom: 20px;
+ }
+
+.next-button-footer,
+.next-button-header{
+    padding-bottom: 10px;
+ }
+
+ .separator {
+   /*font-size: 1.5em;*/
+   margin-top: 20px;
+   /*padding-bottom: 15px;*/
+   vertical-align: middle;
+ }
+
+ .title-group{
+   font-size: 1.5em;
+   color: red;
+ }
+
+ img.zoom {
+    /*width: 350px;
+    height: 200px;*/
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+}
+ 
+.transition {
+    -webkit-transform: scale(3.8); 
+    -moz-transform: scale(3.8);
+    -o-transform: scale(3.8);
+    transform: scale(3.8);
+}
+
+.cliente-data{
+  border-width: thin;
+  border-style: solid;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: 20px;
+}
+
+.totales{
+  font-size: 1em;
+  background-color: rgb(243, 236, 144);
+  margin-left: 0;
+  margin-right: 0;  
+}
