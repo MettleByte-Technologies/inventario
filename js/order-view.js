@@ -209,125 +209,149 @@ if($('#sessrolid').val() != 2){
         {
           text: "<b>Export (Aprobar)</b>",
           action: function (e, dt, node, config) {
-            console.log("export pedido");
+              console.log("export pedido");
+      
+              $.ajax({
+                  url: "../business/order.php",
+                  type: "POST",
+                  data: {
+                      action: "export-file-orders1",
+                      vend_codigo: $("input[name='vend-id']").val(),
+                      vend_empresa: $("input[name='id_empresa']").val(),
+                      nOrder: $("input[name='nOrder']").val(),
+                  },
+                  success: function (resulSet) {
+                      console.log("export to file pedido");
+                      let objResulSet = $.parseJSON(resulSet);  // Parse the response
 
-            /*var rowNode = table.rows()
+                      if (objResulSet["error"] === 0) {
+                          var rows = objResulSet["data"];
+                          
+                          // Order Details Data
+                          let orderDetails = [
+                            [
+                                "PROF_CODIGO_EMPRESA", "PROF_TIPO", "PROF_TIPO_CLIENTE", "PROF_CODIGO_PEDIDO", 
+                                "PROF_ORDEN_COMPRA", "PROF_CODIGO_CLIENTE", "PROF_NOMBRE_CLIENTE", "PROF_DIRECCION", 
+                                "PROF_TELEFONO", "PROF_CEDULA_RUC", "PROF_CODIGO_BODEGA", "PROF_CODIGO_VENDEDOR", 
+                                "PROF_COMISION", "PROF_PRECIO_VTA", "PROF_FECHA", "PROF_FECHA_ENTREGA", 
+                                "PROF_FECHA_ULTIMO_DESP", "PROF_TIPO_MONEDA", "PROF_TIPO_CAMBIO", "PROF_VALOR_PROFDO", 
+                                "PROF_FORMA_PAGO", "PROF_CODIGO_DSCTO", "PROF_DESCUENTO_TOTAL", "PROF_IVA", 
+                                "PROF_VALOR_IVA", "PROF_FECHA_POSTERGA_VCTO", "PROF_FECHA_COBRO", "PROF_VALOR_DESCUENTO", 
+                                "PROF_FECHA_ANULACION", "PROF_ESTADO", "PROF_USUARIO", "PROF_TERMINAL", "PROF_FECHA_SISTEMA", 
+                                "PROF_OBSERVACION", "PROF_ALFA", "PROF_TOTAL_ICE", "PROF_ENVIADO", "PROF_EXPORTADA"
+                            ],
+                            [
+                                rows[0].PEDI_CODIGO_EMPRESA, rows[0].PEDI_TIPO, rows[0].PEDI_TIPO_CLIENTE, rows[0].PEDI_CODIGO_PEDIDO,
+                                rows[0].PEDI_ORDEN_COMPRA, rows[0].PEDI_CODIGO_CLIENTE, rows[0].PEDI_NOMBRE_CLIENTE, rows[0].PEDI_DIRECCION,
+                                rows[0].PEDI_TELEFONO, rows[0].PEDI_CEDULA_RUC, rows[0].PEDI_CODIGO_BODEGA, rows[0].PEDI_CODIGO_VENDEDOR,
+                                rows[0].PEDI_COMISION, rows[0].PEDI_PRECIO_VTA, rows[0].PEDI_FECHA, rows[0].PEDI_FECHA_ENTREGA,
+                                rows[0].PEDI_FECHA_ULTIMO_DESP, rows[0].PEDI_TIPO_MONEDA, rows[0].PEDI_TIPO_CAMBIO, rows[0].PEDI_VALOR_PEDIDO,
+                                rows[0].PEDI_FORMA_PAGO, rows[0].PEDI_CODIGO_DSCTO, rows[0].PEDI_DESCUENTO_TOTAL, rows[0].PEDI_IVA,
+                                rows[0].PEDI_VALOR_IVA, rows[0].PEDI_FECHA_POSTERGA_VCTO, rows[0].PEDI_FECHA_COBRO, rows[0].PEDI_VALOR_DESCUENTO,
+                                rows[0].PEDI_FECHA_ANULACION, rows[0].PEDI_ESTADO, rows[0].PEDI_USUARIO, rows[0].PEDI_TERMINAL, rows[0].PEDI_FECHA_SISTEMA,
+                                rows[0].PEDI_OBSERVACION, rows[0].PEDI_ALFA, rows[0].PEDI_TOTAL_ICE, rows[0].PEDI_ENVIADO, rows[0].PEDI_EXPORTADA
+                            ]
+                          ];
+                        
 
+                          // Create Workbook for Order Details
+                          var wb1 = XLSX.utils.book_new();
+                          var ws1 = XLSX.utils.aoa_to_sheet(orderDetails);
+                          XLSX.utils.book_append_sheet(wb1, ws1, "Order_Details");
+                          var wbout1 = XLSX.write(wb1, { bookType: "xlsx", type: "binary" });
+                          saveAs(new Blob([s2ab(wbout1)], { type: "application/octet-stream" }), "fa_Pedido_"+ rows[0].PEDI_CODIGO_PEDIDO + ".xlsx");
 
-                        console.log(rowNode.count());
-                        $.each( rowNode, function( key, value ) {
-                           console.log( value );
-                        });  */
-            let vbody = $("#tableOrder>tbody");
-            let vrows = vbody.children();
+                          let orderDetails1 = [
+                            [
+                                "DEPR_CODIGO_EMPRESA", "DEPR_CODIGO_BODEGA", "DEPR_CODIGO_PEDIDO", "DEPR_CODIGO_PRODUCTO", 
+                                "DEPR_CANTIDAD", "DEPR_PRECIO", "DEPR_PAGO_IVA", "DEPR_COSTO", "DEPR_CANT_DSCTO1", 
+                                "DEPR_PORC_DSCTO1", "DEPR_CODIGO_DSCTO1", "DEPR_CANT_DSCTO2", "DEPR_PORC_DSCTO2", 
+                                "DEPR_CODIGO_DSCTO2", "DEPR_CANT_DSCTO3", "DEPR_PORC_DSCTO3", "DEPR_CODIGO_DSCTO3", 
+                                "DEPR_CANT_DSCTO4", "DEPR_PORC_DSCTO4", "DEPR_CODIGO_DSCTO4", "DEPR_CANT_DSCTO5", 
+                                "DEPR_PORC_DSCTO5", "DEPR_CODIGO_DSCTO5", "DEPR_FECHA_ENTREGA", "DEPR_PRECIO_LISTA", 
+                                "DEPR_CANTIDAD_PEDIDO", "DEPR_CANTIDAD_OBS", "DEPR_EXTRA", "DEPR_PRECIO_G", "DEPR_NUMERO", 
+                                "DEPR_NUMERO2", "DEPR_CARACTER", "DEPR_CARACTER2", "DEPR_BACKORDER", "DEPR_ENVIO_MAIL", 
+                                "DEPR_VALOR_ICE"
+                            ]
+                        ];
+                        
+                        // Loop through all rows and add each row's data to the array
+                        for (let i = 0; i < rows.length; i++) {
+                            orderDetails1.push([
+                                rows[i].DEPE_CODIGO_EMPRESA, rows[i].DEPE_CODIGO_BODEGA, rows[i].DEPE_CODIGO_PEDIDO, rows[i].DEPE_CODIGO_PRODUCTO,
+                                rows[i].DEPE_CANTIDAD, rows[i].DEPE_PRECIO, rows[i].DEPE_PAGO_IVA, rows[i].DEPE_COSTO, rows[i].DEPE_CANT_DSCTO1,
+                                rows[i].DEPE_PORC_DSCTO1, rows[i].DEPE_CODIGO_DSCTO1, rows[i].DEPE_CANT_DSCTO2, rows[i].DEPE_PORC_DSCTO2,
+                                rows[i].DEPE_CODIGO_DSCTO2, rows[i].DEPE_CANT_DSCTO3, rows[i].DEPE_PORC_DSCTO3, rows[i].DEPE_CODIGO_DSCTO3,
+                                rows[i].DEPE_CANT_DSCTO4, rows[i].DEPE_PORC_DSCTO4, rows[i].DEPE_CODIGO_DSCTO4, rows[i].DEPE_CANT_DSCTO5,
+                                rows[i].DEPE_PORC_DSCTO5, rows[i].DEPE_CODIGO_DSCTO5, rows[i].DEPE_FECHA_ENTREGA, rows[i].DEPE_PRECIO_LISTA,
+                                rows[i].DEPE_CANTIDAD_PEDIDO, rows[i].DEPE_CANTIDAD_OBS, rows[i].DEPE_EXTRA, rows[i].DEPE_PRECIO_G, 
+                                rows[i].DEPE_NUMERO, rows[i].DEPE_NUMERO2, rows[i].DEPE_CARACTER, rows[i].DEPE_CARACTER2, 
+                                rows[i].DEPE_BACKORDER, rows[i].DEPE_ENVIO_MAIL, rows[i].DEPE_VALOR_ICE
+                            ]);
+                        }
+                        
+                        // Create the Excel file and download
+                        var wb2 = XLSX.utils.book_new();
+                        var ws2 = XLSX.utils.aoa_to_sheet(orderDetails1);
+                        XLSX.utils.book_append_sheet(wb2, ws2, "Product_Data");
+                        var wbout2 = XLSX.write(wb2, { bookType: "xlsx", type: "binary" });
+                        var filename = "fa_detalle_pedido_"+rows[0].DEPE_CODIGO_PEDIDO +".xlsx";                       
+                        saveAs(new Blob([s2ab(wbout2)], { type: "application/octet-stream" }), filename);
+                        
+                          
 
-            console.log(vrows);
-
-            let fieldExport = [
-              ["vendedor", parseInt($("input[name='vend-id']").val())],
-              [
-                "Cliente",
-                parseInt($("#client-id").val()),
-                $("#client-name").val(),
-              ],
-              ["", ""],
-              ["Bodega", document.getElementById("select-bodega").value],
-              //["PRODUCTO", "CANTIDAD"],
-            ];
-
-            $.ajax({
-              url: "../business/order.php",
-              type: "POST",
-              data: {
-                action: "export-file-order",
-                vend_codigo: $("input[name='vend-id']").val(),
-                vend_empresa: $("input[name='id_empresa']").val(),
-                nOrder: $("input[name='nOrder']").val(),
-              },
-              success: function (resulSet) {
-                console.log("export to file pedido");
-                //console.log(resulSet);
-                var objResulSet = $.parseJSON(resulSet);
-                switch (objResulSet["error"]) {
-                  case 0:
-                    var rows = objResulSet["data"];
-                    var itemsList = "";
-
-                    for (let i = 0; i < rows.length; i++) {
-                      //console.log(rows[i]);
-                      //prod = parseInt(rows[i][0]);
-                      prod = "'" + rows[i][0];
-                      qty = rows[i][1];
-                      //console.log(prod + ' - ' + qty);
-                      fieldExport.push([prod, qty]);
-                    }
-					//if($("input[name='data-exportada']").val() == "N"){
-                    	console.log(fieldExport);
-					
-                    	ExportToExcel(fieldExport, $("#nOrder").text(), false);
-					//}
-
-                    console.log($("input[name='nOrder']").val());
-
-                    $.ajax({
-                      url: "../business/order.php",
-                      type: "POST",
-                      data: {
-                        action: "export-order",
-                        vend_codigo: $("input[name='vend-id']").val(),
-                        vend_empresa: $("input[name='id_empresa']").val(),
-                        nOrder: $("input[name='nOrder']").val(),
-                      },
-                      success: function (resulSet) {
-                        console.log("aprobar pedido");
-                        console.log(resulSet);
-                        var objResulSet = $.parseJSON(resulSet);
-                        switch (objResulSet["error"]) {
-                          case 0:
-                            $.ajax({
-                              url: "../modules/order_list.php",
+                          console.log($("input[name='nOrder']").val());
+      
+                          $.ajax({
+                              url: "../business/order.php",
                               type: "POST",
                               data: {
-                                vend_codigo: $(
-                                  "input[name='id_vendedor']"
-                                ).val(),
-                                vend_empresa: $(
-                                  "input[name='id_empresa']"
-                                ).val(),
-                                estado: "%",
+                                  action: "export-order",
+                                  vend_codigo: $("input[name='vend-id']").val(),
+                                  vend_empresa: $("input[name='id_empresa']").val(),
+                                  nOrder: $("input[name='nOrder']").val(),
                               },
-                              success: function (resp) {
-                                if (resp == "../") {
-                                  window.location.href = resp;
-                                } else {
-                                  $("#title-content").html("<h2>Pedidos</h2>");
-                                  $("#content").html(resp);
-                                }
+                              success: function (resulSet) {
+                                  console.log("aprobar pedido");
+                                  console.log(resulSet);
+                                  var objResulSet = $.parseJSON(resulSet);
+                                  if (objResulSet["error"] === 0) {
+                                      $.ajax({
+                                          url: "../modules/order_list.php",
+                                          type: "POST",
+                                          data: {
+                                              vend_codigo: $("input[name='id_vendedor']").val(),
+                                              vend_empresa: $("input[name='id_empresa']").val(),
+                                              estado: "%",
+                                          },
+                                          success: function (resp) {
+                                              if (resp == "../") {
+                                                  window.location.href = resp;
+                                              } else {
+                                                  $("#title-content").html("<h2>Pedidos</h2>");
+                                                  $("#content").html(resp);
+                                              }
+                                          },
+                                      });
+                                  } else {
+                                      $("#message").html(objResulSet["data"]);
+                                      alertMsg("#message");
+                                  }
                               },
-                            });
-
-                            break;
-                          default:
-                            $("#message").html(objResulSet["data"]);
-                            alertMsg("#message");
-                            break;
-                        }
-                      },
-                    });
-
-                    break;
-                  default:
-                    $("#message").html(objResulSet["data"]);
-                    alertMsg("#message");
-                    break;
-                }
-              },
-            });
+                          });
+      
+                      } else {
+                          $("#message").html(objResulSet["data"]);
+                          alertMsg("#message");
+                      }
+                  },
+              });
           },
-
+      
           enabled: estadoA,
           className: "feather-download",
-        },
+      },
+      
         {
           text: "<b>Revisar descuentos</b>",
           action: function (e, dt, node, config) {

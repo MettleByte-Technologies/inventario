@@ -84,6 +84,8 @@
             $this->clase = "csOrder";
         }
 
+        
+
         public function UpdateOrderTrxSP($empresa_id, $nOrder, $nNotaventa, $items, $bodega){ 
             //$arrayJson = json_decode($items);
             $items = "'".$items."'";
@@ -216,6 +218,53 @@
 
         }
 
+        // Assuming this function is in your Controller or Model
+
+        public function getOrderListArrayExport1($empresa_id, $vendedor_id, $nOrden) {
+            // Filter for the specific order code
+            $where = "fp.DEPE_CODIGO_PEDIDO = $nOrden";
+
+            // If other filters are required, include them here
+            if ($empresa_id) {
+                $where .= " AND f.PEDI_CODIGO_EMPRESA = $empresa_id";
+            }
+            if ($vendedor_id) {
+                $where .= " AND f.PEDI_CODIGO_VENDEDOR = $vendedor_id";
+            }
+
+            $query = "
+                SELECT 
+                    -- Fields from fa_pedido table (aliased as f)
+                    f.PEDI_CODIGO_EMPRESA, f.PEDI_TIPO, f.PEDI_TIPO_CLIENTE, f.PEDI_CODIGO_PEDIDO,
+                    f.PEDI_ORDEN_COMPRA, f.PEDI_CODIGO_CLIENTE, f.PEDI_NOMBRE_CLIENTE, f.PEDI_DIRECCION,
+                    f.PEDI_TELEFONO, f.PEDI_CEDULA_RUC, f.PEDI_CODIGO_BODEGA, f.PEDI_CODIGO_VENDEDOR,
+                    f.PEDI_COMISION, f.PEDI_PRECIO_VTA, f.PEDI_FECHA, f.PEDI_FECHA_ENTREGA, 
+                    f.PEDI_FECHA_ULTIMO_DESP, f.PEDI_TIPO_MONEDA, f.PEDI_TIPO_CAMBIO, f.PEDI_VALOR_PEDIDO,
+                    f.PEDI_FORMA_PAGO, f.PEDI_CODIGO_DSCTO, f.PEDI_DESCUENTO_TOTAL, f.PEDI_IVA, 
+                    f.PEDI_VALOR_IVA, f.PEDI_FECHA_POSTERGA_VCTO, f.PEDI_FECHA_COBRO, f.PEDI_VALOR_DESCUENTO,
+                    f.PEDI_FECHA_ANULACION, f.PEDI_ESTADO, f.PEDI_USUARIO, f.PEDI_TERMINAL, 
+                    f.PEDI_FECHA_SISTEMA, f.PEDI_OBSERVACION, f.PEDI_ALFA, f.PEDI_TOTAL_ICE, 
+                    f.PEDI_ENVIADO, f.PEDI_EXPORTADA,
+
+                    -- Fields from fa_detalle_pedido table (aliased as fp)
+                    fp.DEPE_CODIGO_EMPRESA, fp.DEPE_CODIGO_BODEGA, fp.DEPE_CODIGO_PEDIDO, fp.DEPE_CODIGO_PRODUCTO, 
+                    fp.DEPE_CANTIDAD, fp.DEPE_PRECIO, fp.DEPE_PAGO_IVA, fp.DEPE_COSTO, fp.DEPE_CANT_DSCTO1,
+                    fp.DEPE_PORC_DSCTO1, fp.DEPE_CODIGO_DSCTO1, fp.DEPE_CANT_DSCTO2, fp.DEPE_PORC_DSCTO2,
+                    fp.DEPE_CODIGO_DSCTO2, fp.DEPE_CANT_DSCTO3, fp.DEPE_PORC_DSCTO3, fp.DEPE_CODIGO_DSCTO3,
+                    fp.DEPE_CANT_DSCTO4, fp.DEPE_PORC_DSCTO4, fp.DEPE_CODIGO_DSCTO4, fp.DEPE_CANT_DSCTO5,
+                    fp.DEPE_PORC_DSCTO5, fp.DEPE_CODIGO_DSCTO5, fp.DEPE_FECHA_ENTREGA, fp.DEPE_PRECIO_LISTA,
+                    fp.DEPE_CANTIDAD_PEDIDO, fp.DEPE_CANTIDAD_OBS, fp.DEPE_EXTRA, fp.DEPE_PRECIO_G,
+                    fp.DEPE_NUMERO, fp.DEPE_NUMERO2, fp.DEPE_CARACTER, fp.DEPE_CARACTER2, fp.DEPE_BACKORDER,
+                    fp.DEPE_ENVIO_MAIL, fp.DEPE_VALOR_ICE
+                FROM fa_detalle_pedido fp
+                INNER JOIN fa_pedido f
+                ON f.PEDI_CODIGO_PEDIDO = fp.DEPE_CODIGO_PEDIDO
+                WHERE $where
+            ";
+
+            // Execute the query and return the result as an array
+            return $this->dmlSelectArray($query); // Assuming dmlSelectArray() handles the query execution and returns the result as an array
+        }
         public function getOrderListArray($empresa_id, $vendedor_id, $estado, $asc=0){
             $order = ($asc == 0 ? 'ASC' : 'DESC');
             $where = '';
@@ -850,7 +899,8 @@
 
             return $queries;
         }
-  
+        
+        
    
     }
 ?>

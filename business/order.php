@@ -41,6 +41,11 @@
                 $orderlist = $obj->getOrderListArrayExport($vend_empresa, $vend_codigo, $_POST['nOrder']);     
                 echo json_encode($orderlist);
             }
+            if ($action == "export-file-orders1"){
+                //$estado = $_POST['estado'];
+                $orderlist = $obj->getOrderListArrayExport1($vend_empresa, $vend_codigo, $_POST['nOrder']);     
+                echo json_encode($orderlist);
+            }
 
             if ($action == "sent-order"){
                 $list = explode(',', $_POST['sentorders']);
