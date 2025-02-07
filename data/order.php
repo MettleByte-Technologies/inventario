@@ -236,7 +236,7 @@
                 SELECT 
                     -- Fields from fa_pedido table (aliased as f)
                     f.PEDI_CODIGO_EMPRESA, f.PEDI_TIPO, f.PEDI_TIPO_CLIENTE, f.PEDI_CODIGO_PEDIDO,
-                    f.PEDI_ORDEN_COMPRA, f.PEDI_CODIGO_CLIENTE, f.PEDI_NOMBRE_CLIENTE, f.PEDI_DIRECCION,
+                    f.PEDI_ORDEN_COMPRA, f.PEDI_CODIGO_CLIENTE, c.NOMBRE AS PEDI_NOMBRE_CLIENTE, f.PEDI_DIRECCION,
                     f.PEDI_TELEFONO, f.PEDI_CEDULA_RUC, f.PEDI_CODIGO_BODEGA, f.PEDI_CODIGO_VENDEDOR,
                     f.PEDI_COMISION, f.PEDI_PRECIO_VTA, f.PEDI_FECHA, f.PEDI_FECHA_ENTREGA, 
                     f.PEDI_FECHA_ULTIMO_DESP, f.PEDI_TIPO_MONEDA, f.PEDI_TIPO_CAMBIO, f.PEDI_VALOR_PEDIDO,
@@ -258,6 +258,7 @@
                     fp.DEPE_ENVIO_MAIL, fp.DEPE_VALOR_ICE
                 FROM fa_detalle_pedido fp
                 INNER JOIN fa_pedido f
+                INNER JOIN clv_cliente_proyecto c ON c.CODIGO = f.PEDI_CODIGO_CLIENTE
                 ON f.PEDI_CODIGO_PEDIDO = fp.DEPE_CODIGO_PEDIDO
                 WHERE $where
             ";
@@ -265,6 +266,7 @@
             // Execute the query and return the result as an array
             return $this->dmlSelectArray($query); // Assuming dmlSelectArray() handles the query execution and returns the result as an array
         }
+        
         public function getOrderListArray($empresa_id, $vendedor_id, $estado, $asc=0){
             $order = ($asc == 0 ? 'ASC' : 'DESC');
             $where = '';

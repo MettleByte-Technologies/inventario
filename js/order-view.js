@@ -224,32 +224,67 @@ if($('#sessrolid').val() != 2){
                       console.log("export to file pedido");
                       let objResulSet = $.parseJSON(resulSet);  // Parse the response
 
+                      function formatDateToMMDDYYYY(dateString) {
+                        if (!dateString) return ""; // Handle null/undefined cases
+                        let date = new Date(dateString);
+                        let mm = String(date.getMonth() + 1).padStart(2, "0"); // Month is 0-based
+                        let dd = String(date.getDate()).padStart(2, "0");
+                        let yyyy = date.getFullYear();
+                        return `${mm}-${dd}-${yyyy}`;
+                    }
+
                       if (objResulSet["error"] === 0) {
                           var rows = objResulSet["data"];
                           
                           // Order Details Data
                           let orderDetails = [
                             [
-                                "PROF_CODIGO_EMPRESA", "PROF_TIPO", "PROF_TIPO_CLIENTE", "PROF_CODIGO_PEDIDO", 
-                                "PROF_ORDEN_COMPRA", "PROF_CODIGO_CLIENTE", "PROF_NOMBRE_CLIENTE", "PROF_DIRECCION", 
-                                "PROF_TELEFONO", "PROF_CEDULA_RUC", "PROF_CODIGO_BODEGA", "PROF_CODIGO_VENDEDOR", 
-                                "PROF_COMISION", "PROF_PRECIO_VTA", "PROF_FECHA", "PROF_FECHA_ENTREGA", 
-                                "PROF_FECHA_ULTIMO_DESP", "PROF_TIPO_MONEDA", "PROF_TIPO_CAMBIO", "PROF_VALOR_PROFDO", 
-                                "PROF_FORMA_PAGO", "PROF_CODIGO_DSCTO", "PROF_DESCUENTO_TOTAL", "PROF_IVA", 
-                                "PROF_VALOR_IVA", "PROF_FECHA_POSTERGA_VCTO", "PROF_FECHA_COBRO", "PROF_VALOR_DESCUENTO", 
-                                "PROF_FECHA_ANULACION", "PROF_ESTADO", "PROF_USUARIO", "PROF_TERMINAL", "PROF_FECHA_SISTEMA", 
-                                "PROF_OBSERVACION", "PROF_ALFA", "PROF_TOTAL_ICE", "PROF_ENVIADO", "PROF_EXPORTADA"
+                                "PEDI_CODIGO_EMPRESA", "PEDI_TIPO", "PEDI_TIPO_CLIENTE", "PEDI_CODIGO_PEDIDO", 
+                                "PEDI_ORDEN_COMPRA", "PEDI_CODIGO_CLIENTE", "PEDI_NOMBRE_CLIENTE", "PEDI_DIRECCION", 
+                                "PEDI_TELEFONO", "PEDI_CEDULA_RUC", "PEDI_CODIGO_BODEGA", "PEDI_CODIGO_VENDEDOR", 
+                                "PEDI_COMISION", "PEDI_PRECIO_VTA", "PEDI_FECHA", "PEDI_FECHA_ENTREGA", 
+                                "PEDI_FECHA_ULTIMO_DESP", "PEDI_TIPO_MONEDA", "PEDI_TIPO_CAMBIO", "PEDI_VALOR_PEDIDO", 
+                                "PEDI_FORMA_PAGO", "PEDI_CODIGO_DSCTO", "PEDI_DESCUENTO_TOTAL", "PEDI_IVA", 
+                                "PEDI_VALOR_IVA", "PEDI_FECHA_POSTERGA_VCTO", "PEDI_FECHA_COBRO", "PEDI_VALOR_DESCUENTO", 
+                                "PEDI_FECHA_ANULACION", "PEDI_ESTADO", "PEDI_USUARIO", "PEDI_TERMINAL", "PEDI_FECHA_SISTEMA", 
+                                "PEDI_OBSERVACION", "PEDI_ALFA", "PEDI_TOTAL_ICE"
                             ],
                             [
-                                rows[0].PEDI_CODIGO_EMPRESA, rows[0].PEDI_TIPO, rows[0].PEDI_TIPO_CLIENTE, rows[0].PEDI_CODIGO_PEDIDO,
-                                rows[0].PEDI_ORDEN_COMPRA, rows[0].PEDI_CODIGO_CLIENTE, rows[0].PEDI_NOMBRE_CLIENTE, rows[0].PEDI_DIRECCION,
-                                rows[0].PEDI_TELEFONO, rows[0].PEDI_CEDULA_RUC, rows[0].PEDI_CODIGO_BODEGA, rows[0].PEDI_CODIGO_VENDEDOR,
-                                rows[0].PEDI_COMISION, rows[0].PEDI_PRECIO_VTA, rows[0].PEDI_FECHA, rows[0].PEDI_FECHA_ENTREGA,
-                                rows[0].PEDI_FECHA_ULTIMO_DESP, rows[0].PEDI_TIPO_MONEDA, rows[0].PEDI_TIPO_CAMBIO, rows[0].PEDI_VALOR_PEDIDO,
-                                rows[0].PEDI_FORMA_PAGO, rows[0].PEDI_CODIGO_DSCTO, rows[0].PEDI_DESCUENTO_TOTAL, rows[0].PEDI_IVA,
-                                rows[0].PEDI_VALOR_IVA, rows[0].PEDI_FECHA_POSTERGA_VCTO, rows[0].PEDI_FECHA_COBRO, rows[0].PEDI_VALOR_DESCUENTO,
-                                rows[0].PEDI_FECHA_ANULACION, rows[0].PEDI_ESTADO, rows[0].PEDI_USUARIO, rows[0].PEDI_TERMINAL, rows[0].PEDI_FECHA_SISTEMA,
-                                rows[0].PEDI_OBSERVACION, rows[0].PEDI_ALFA, rows[0].PEDI_TOTAL_ICE, rows[0].PEDI_ENVIADO, rows[0].PEDI_EXPORTADA
+                                rows[0].PEDI_CODIGO_EMPRESA, 
+                                1, 
+                                1, 
+                                rows[0].PEDI_CODIGO_PEDIDO,
+                                rows[0].PEDI_ORDEN_COMPRA, 
+                                rows[0].PEDI_CODIGO_CLIENTE, 
+                                rows[0].PEDI_NOMBRE_CLIENTE, 
+                                "N",
+                                "N", 
+                                "N", 
+                                7, 
+                                rows[0].PEDI_CODIGO_VENDEDOR,
+                                rows[0].PEDI_COMISION, 
+                                parseFloat(rows[0].PEDI_PRECIO_VTA).toFixed(2), 
+                                formatDateToMMDDYYYY(rows[0].PEDI_FECHA), 
+                                formatDateToMMDDYYYY(rows[0].PEDI_FECHA_ENTREGA),
+                                rows[0].PEDI_FECHA_ULTIMO_DESP, 
+                                2, 
+                                0, 
+                                parseFloat(rows[0].PEDI_VALOR_PEDIDO).toFixed(2),
+                                5, 
+                                rows[0].PEDI_CODIGO_DSCTO, 
+                                parseFloat(rows[0].PEDI_DESCUENTO_TOTAL).toFixed(2), 
+                                15,
+                                rows[0].PEDI_VALOR_IVA, 
+                                rows[0].PEDI_FECHA_POSTERGA_VCTO, 
+                                rows[0].PEDI_FECHA_COBRO, 
+                                rows[0].PEDI_VALOR_DESCUENTO,
+                                rows[0].PEDI_FECHA_ANULACION, 
+                                "E", 
+                                rows[0].PEDI_USUARIO, 
+                                rows[0].PEDI_TERMINAL, 
+                                rows[0].PEDI_FECHA_SISTEMA,
+                                rows[0].PEDI_OBSERVACION, 
+                                rows[0].PEDI_ALFA, 0
                             ]
                           ];
                         
@@ -263,30 +298,57 @@ if($('#sessrolid').val() != 2){
 
                           let orderDetails1 = [
                             [
-                                "DEPR_CODIGO_EMPRESA", "DEPR_CODIGO_BODEGA", "DEPR_CODIGO_PEDIDO", "DEPR_CODIGO_PRODUCTO", 
-                                "DEPR_CANTIDAD", "DEPR_PRECIO", "DEPR_PAGO_IVA", "DEPR_COSTO", "DEPR_CANT_DSCTO1", 
-                                "DEPR_PORC_DSCTO1", "DEPR_CODIGO_DSCTO1", "DEPR_CANT_DSCTO2", "DEPR_PORC_DSCTO2", 
-                                "DEPR_CODIGO_DSCTO2", "DEPR_CANT_DSCTO3", "DEPR_PORC_DSCTO3", "DEPR_CODIGO_DSCTO3", 
-                                "DEPR_CANT_DSCTO4", "DEPR_PORC_DSCTO4", "DEPR_CODIGO_DSCTO4", "DEPR_CANT_DSCTO5", 
-                                "DEPR_PORC_DSCTO5", "DEPR_CODIGO_DSCTO5", "DEPR_FECHA_ENTREGA", "DEPR_PRECIO_LISTA", 
-                                "DEPR_CANTIDAD_PEDIDO", "DEPR_CANTIDAD_OBS", "DEPR_EXTRA", "DEPR_PRECIO_G", "DEPR_NUMERO", 
-                                "DEPR_NUMERO2", "DEPR_CARACTER", "DEPR_CARACTER2", "DEPR_BACKORDER", "DEPR_ENVIO_MAIL", 
-                                "DEPR_VALOR_ICE"
+                                "DEPE_CODIGO_EMPRESA", "DEPE_CODIGO_BODEGA", "DEPE_CODIGO_PEDIDO", "DEPE_CODIGO_PRODUCTO", 
+                                "DEPE_CANTIDAD", "DEPE_PRECIO", "DEPE_PAGO_IVA", "DEPE_COSTO", "DEPE_CANT_DSCTO1", 
+                                "DEPE_PORC_DSCTO1", "DEPE_CODIGO_DSCTO1", "DEPE_CANT_DSCTO2", "DEPE_PORC_DSCTO2", 
+                                "DEPE_CODIGO_DSCTO2", "DEPE_CANT_DSCTO3", "DEPE_PORC_DSCTO3", "DEPE_CODIGO_DSCTO3", 
+                                "DEPE_CANT_DSCTO4", "DEPE_PORC_DSCTO4", "DEPE_CODIGO_DSCTO4", "DEPE_CANT_DSCTO5", 
+                                "DEPE_PORC_DSCTO5", "DEPE_CODIGO_DSCTO5", "DEPE_FECHA_ENTREGA", "DEPE_PRECIO_LISTA", 
+                                "DEPE_CANTIDAD_PEDIDO", "DEPE_CANTIDAD_OBS", "DEPE_EXTRA", "DEPE_PRECIO_G", "DEPE_NUMERO", 
+                                "DEPE_NUMERO2", "DEPE_CARACTER", "DEPE_CARACTER2", "DEPE_BACKORDER", "DEPE_ENVIO_MAIL", 
+                                "DEPE_VALOR_ICE"
                             ]
                         ];
                         
                         // Loop through all rows and add each row's data to the array
                         for (let i = 0; i < rows.length; i++) {
                             orderDetails1.push([
-                                rows[i].DEPE_CODIGO_EMPRESA, rows[i].DEPE_CODIGO_BODEGA, rows[i].DEPE_CODIGO_PEDIDO, rows[i].DEPE_CODIGO_PRODUCTO,
-                                rows[i].DEPE_CANTIDAD, rows[i].DEPE_PRECIO, rows[i].DEPE_PAGO_IVA, rows[i].DEPE_COSTO, rows[i].DEPE_CANT_DSCTO1,
-                                rows[i].DEPE_PORC_DSCTO1, rows[i].DEPE_CODIGO_DSCTO1, rows[i].DEPE_CANT_DSCTO2, rows[i].DEPE_PORC_DSCTO2,
-                                rows[i].DEPE_CODIGO_DSCTO2, rows[i].DEPE_CANT_DSCTO3, rows[i].DEPE_PORC_DSCTO3, rows[i].DEPE_CODIGO_DSCTO3,
-                                rows[i].DEPE_CANT_DSCTO4, rows[i].DEPE_PORC_DSCTO4, rows[i].DEPE_CODIGO_DSCTO4, rows[i].DEPE_CANT_DSCTO5,
-                                rows[i].DEPE_PORC_DSCTO5, rows[i].DEPE_CODIGO_DSCTO5, rows[i].DEPE_FECHA_ENTREGA, rows[i].DEPE_PRECIO_LISTA,
-                                rows[i].DEPE_CANTIDAD_PEDIDO, rows[i].DEPE_CANTIDAD_OBS, rows[i].DEPE_EXTRA, rows[i].DEPE_PRECIO_G, 
-                                rows[i].DEPE_NUMERO, rows[i].DEPE_NUMERO2, rows[i].DEPE_CARACTER, rows[i].DEPE_CARACTER2, 
-                                rows[i].DEPE_BACKORDER, rows[i].DEPE_ENVIO_MAIL, rows[i].DEPE_VALOR_ICE
+                                rows[i].DEPE_CODIGO_EMPRESA, 
+                                7, 
+                                rows[i].DEPE_CODIGO_PEDIDO, 
+                                rows[i].DEPE_CODIGO_PRODUCTO,
+                                rows[i].DEPE_CANTIDAD, 
+                                rows[i].DEPE_PRECIO, 
+                                "S", 
+                                rows[i].DEPE_COSTO, 
+                                rows[i].DEPE_CANT_DSCTO1,
+                                rows[i].DEPE_PORC_DSCTO1, 
+                                rows[i].DEPE_CODIGO_DSCTO1, 
+                                rows[i].DEPE_CANT_DSCTO2, 
+                                rows[i].DEPE_PORC_DSCTO2,
+                                rows[i].DEPE_CODIGO_DSCTO2, 
+                                rows[i].DEPE_CANT_DSCTO3, 
+                                rows[i].DEPE_PORC_DSCTO3, 
+                                rows[i].DEPE_CODIGO_DSCTO3,
+                                rows[i].DEPE_CANT_DSCTO4, 
+                                rows[i].DEPE_PORC_DSCTO4, 
+                                rows[i].DEPE_CODIGO_DSCTO4, 
+                                rows[i].DEPE_CANT_DSCTO5,
+                                rows[i].DEPE_PORC_DSCTO5, 
+                                rows[i].DEPE_CODIGO_DSCTO5, 
+                                formatDateToMMDDYYYY(rows[0].DEPE_FECHA_ENTREGA), 
+                                rows[i].DEPE_PRECIO_LISTA,
+                                rows[i].DEPE_CANTIDAD_PEDIDO, 
+                                rows[i].DEPE_CANTIDAD_OBS, 
+                                0, 
+                                rows[i].DEPE_PRECIO_G, 
+                                rows[i].DEPE_NUMERO, 
+                                rows[i].DEPE_NUMERO2, 
+                                rows[i].DEPE_CARACTER, 
+                                rows[i].DEPE_CARACTER2, 
+                                rows[i].DEPE_BACKORDER, 
+                                rows[i].DEPE_ENVIO_MAIL, 
+                                0
                             ]);
                         }
                         
