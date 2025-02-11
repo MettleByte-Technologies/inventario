@@ -263,7 +263,7 @@ if($('#sessrolid').val() != 2){
                                 7, 
                                 rows[0].PEDI_CODIGO_VENDEDOR,
                                 rows[0].PEDI_COMISION, 
-                                parseFloat(rows[0].PEDI_PRECIO_VTA).toFixed(2), 
+                                "", 
                                 formatDateToMMDDYYYY(rows[0].PEDI_FECHA), 
                                 formatDateToMMDDYYYY(rows[0].PEDI_FECHA_ENTREGA),
                                 rows[0].PEDI_FECHA_ULTIMO_DESP, 
@@ -272,9 +272,9 @@ if($('#sessrolid').val() != 2){
                                 parseFloat(rows[0].PEDI_VALOR_PEDIDO).toFixed(2),
                                 5, 
                                 rows[0].PEDI_CODIGO_DSCTO, 
-                                parseFloat(rows[0].PEDI_DESCUENTO_TOTAL).toFixed(2), 
+                                "", 
                                 15,
-                                rows[0].PEDI_VALOR_IVA, 
+                                "", 
                                 rows[0].PEDI_FECHA_POSTERGA_VCTO, 
                                 rows[0].PEDI_FECHA_COBRO, 
                                 rows[0].PEDI_VALOR_DESCUENTO,
@@ -282,9 +282,10 @@ if($('#sessrolid').val() != 2){
                                 "E", 
                                 rows[0].PEDI_USUARIO, 
                                 rows[0].PEDI_TERMINAL, 
-                                rows[0].PEDI_FECHA_SISTEMA,
+                                formatDateToMMDDYYYY(rows[0].PEDI_FECHA_SISTEMA),
                                 rows[0].PEDI_OBSERVACION, 
-                                rows[0].PEDI_ALFA, 0
+                                "N", 
+                                0
                             ]
                           ];
                         

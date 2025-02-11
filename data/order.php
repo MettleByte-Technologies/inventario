@@ -242,7 +242,7 @@
                     f.PEDI_FECHA_ULTIMO_DESP, f.PEDI_TIPO_MONEDA, f.PEDI_TIPO_CAMBIO, f.PEDI_VALOR_PEDIDO,
                     f.PEDI_FORMA_PAGO, f.PEDI_CODIGO_DSCTO, f.PEDI_DESCUENTO_TOTAL, f.PEDI_IVA, 
                     f.PEDI_VALOR_IVA, f.PEDI_FECHA_POSTERGA_VCTO, f.PEDI_FECHA_COBRO, f.PEDI_VALOR_DESCUENTO,
-                    f.PEDI_FECHA_ANULACION, f.PEDI_ESTADO, f.PEDI_USUARIO, f.PEDI_TERMINAL, 
+                    f.PEDI_FECHA_ANULACION, f.PEDI_ESTADO, u.USERNAME AS PEDI_USUARIO, f.PEDI_TERMINAL, 
                     f.PEDI_FECHA_SISTEMA, f.PEDI_OBSERVACION, f.PEDI_ALFA, f.PEDI_TOTAL_ICE, 
                     f.PEDI_ENVIADO, f.PEDI_EXPORTADA,
 
@@ -257,9 +257,9 @@
                     fp.DEPE_NUMERO, fp.DEPE_NUMERO2, fp.DEPE_CARACTER, fp.DEPE_CARACTER2, fp.DEPE_BACKORDER,
                     fp.DEPE_ENVIO_MAIL, fp.DEPE_VALOR_ICE
                 FROM fa_detalle_pedido fp
-                INNER JOIN fa_pedido f
+                INNER JOIN fa_pedido f ON f.PEDI_CODIGO_PEDIDO = fp.DEPE_CODIGO_PEDIDO
                 INNER JOIN clv_cliente_proyecto c ON c.CODIGO = f.PEDI_CODIGO_CLIENTE
-                ON f.PEDI_CODIGO_PEDIDO = fp.DEPE_CODIGO_PEDIDO
+                LEFT JOIN tbl_user_proyecto u ON u.vend_codigo = f.PEDI_CODIGO_VENDEDOR -- Fetching username
                 WHERE $where
             ";
 
