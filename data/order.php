@@ -233,7 +233,7 @@
             }
 
             $query = "
-                SELECT 
+                SELECT DISTINCT
                     -- Fields from fa_pedido table (aliased as f)
                     f.PEDI_CODIGO_EMPRESA, f.PEDI_TIPO, f.PEDI_TIPO_CLIENTE, f.PEDI_CODIGO_PEDIDO,
                     f.PEDI_ORDEN_COMPRA, f.PEDI_CODIGO_CLIENTE, c.NOMBRE AS PEDI_NOMBRE_CLIENTE, f.PEDI_DIRECCION,
