@@ -310,20 +310,14 @@ if($('#sessrolid').val() != 2){
                                 "DEPE_VALOR_ICE"
                             ]
                         ];
-                          let uniqueRows = rows.filter((value, index, self) => 
-                            index === self.findIndex((t) => (                              
-                                t.DEPE_CODIGO_PRODUCTO === value.DEPE_CODIGO_PRODUCTO
-                            ))
-                          );
-                        
                         // Loop through all rows and add each row's data to the array
-                        for (let i = 0; i < uniqueRows.length; i++) {
+                        for (let i = 0; i < rows.length; i++) {
                           orderDetails1.push([
-                              uniqueRows[i].DEPE_CODIGO_EMPRESA,
+                              rows[i].DEPE_CODIGO_EMPRESA,
                               7,
-                              uniqueRows[i].DEPE_CODIGO_PEDIDO,
-                              uniqueRows[i].DEPE_CODIGO_PRODUCTO,
-                              uniqueRows[i].DEPE_CANTIDAD,
+                              rows[i].DEPE_CODIGO_PEDIDO,
+                              rows[i].DEPE_CODIGO_PRODUCTO,
+                              rows[i].DEPE_CANTIDAD,
                               0,
                               "S",
                               0,
@@ -342,9 +336,9 @@ if($('#sessrolid').val() != 2){
                               "",
                               "",
                               "",
-                              formatDateToMMDDYYYY(uniqueRows[i].DEPE_FECHA_ENTREGA),
+                              formatDateToMMDDYYYY(rows[0].DEPE_FECHA_ENTREGA),
                               0,
-                              uniqueRows[i].DEPE_CANTIDAD_PEDIDO,
+                              rows[i].DEPE_CANTIDAD_PEDIDO,
                               "",
                               0,
                               0,
@@ -356,7 +350,7 @@ if($('#sessrolid').val() != 2){
                               "",
                               0
                           ]);
-                        }
+                      }
                         
                         // Create the Excel file and download
                         var wb2 = XLSX.utils.book_new();
