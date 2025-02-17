@@ -224,14 +224,15 @@ if($('#sessrolid').val() != 2){
                       console.log("export to file pedido");
                       let objResulSet = $.parseJSON(resulSet);  // Parse the response
 
-                      function formatDateToMMDDYYYY(dateString) {
-                        if (!dateString) return ""; // Handle null/undefined cases
+                      function formatDateToMMDDYYYY_UTC(dateString) {
+                        if (!dateString) return ""; 
                         let date = new Date(dateString);
-                        let mm = String(date.getMonth() + 1).padStart(2, "0"); // Month is 0-based
-                        let dd = String(date.getDate()).padStart(2, "0");
-                        let yyyy = date.getFullYear();
+                        let mm = String(date.getUTCMonth() + 1).padStart(2, "0"); 
+                        let dd = String(date.getUTCDate()).padStart(2, "0");
+                        let yyyy = date.getUTCFullYear();
                         return `${mm}/${dd}/${yyyy}`;
                     }
+                    
 
                       if (objResulSet["error"] === 0) {
                           var rows = objResulSet["data"];
@@ -250,43 +251,43 @@ if($('#sessrolid').val() != 2){
                                 "PEDI_OBSERVACION", "PEDI_ALFA", "PEDI_TOTAL_ICE"
                             ],
                             [
-                              rows[0].PEDI_CODIGO_EMPRESA,
-                              1,
-                              1,
-                              rows[0].PEDI_CODIGO_PEDIDO,
-                              "",
-                              rows[0].PEDI_CODIGO_CLIENTE,
-                              rows[0].PEDI_NOMBRE_CLIENTE,
-                              "N",
-                              "N",
-                              "N",
-                              7,
-                              rows[0].PEDI_CODIGO_VENDEDOR,
-                              "",
-                              "",
-                              formatDateToMMDDYYYY(rows[0].PEDI_FECHA),
-                              formatDateToMMDDYYYY(rows[0].PEDI_FECHA_ENTREGA),
-                              "",
-                              2,
-                              0,
-                              "",
-                              0,
-                              "",
-                              "",
-                              15,
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              "E",
-                              "",
-                              rows[0].PEDI_TERMINAL,
-                              formatDateToMMDDYYYY(rows[0].PEDI_FECHA_SISTEMA),
-                              rows[0].PEDI_OBSERVACION,
-                              "N",
-                              0
-                          ]
+                                rows[0].PEDI_CODIGO_EMPRESA, 
+                                1, 
+                                1, 
+                                rows[0].PEDI_CODIGO_PEDIDO,
+                                "", 
+                                rows[0].PEDI_CODIGO_CLIENTE, 
+                                rows[0].PEDI_NOMBRE_CLIENTE, 
+                                "N",
+                                "N", 
+                                "N", 
+                                7, 
+                                rows[0].PEDI_CODIGO_VENDEDOR,
+                                "", 
+                                "", 
+                                formatDateToMMDDYYYY_UTC(rows[0].PEDI_FECHA), 
+                                formatDateToMMDDYYYY_UTC(rows[0].PEDI_FECHA_ENTREGA),
+                                "", 
+                                2, 
+                                0, 
+                                "",
+                                5, 
+                                "", 
+                                "", 
+                                15,
+                                "", 
+                                "", 
+                                "", 
+                                "",
+                                "", 
+                                "E", 
+                                rows[0].PEDI_USUARIO, 
+                                rows[0].PEDI_TERMINAL, 
+                                formatDateToMMDDYYYY_UTC(rows[0].PEDI_FECHA_SISTEMA),
+                                rows[0].PEDI_OBSERVACION, 
+                                "N", 
+                                0
+                            ]
                           ];
                         
 
@@ -312,45 +313,45 @@ if($('#sessrolid').val() != 2){
                         ];
                         // Loop through all rows and add each row's data to the array
                         for (let i = 0; i < rows.length; i++) {
-                          orderDetails1.push([
-                              rows[i].DEPE_CODIGO_EMPRESA,
-                              7,
-                              rows[i].DEPE_CODIGO_PEDIDO,
-                              rows[i].DEPE_CODIGO_PRODUCTO,
-                              rows[i].DEPE_CANTIDAD,
-                              0,
-                              "S",
-                              0,
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              formatDateToMMDDYYYY(rows[0].DEPE_FECHA_ENTREGA),
-                              0,
-                              rows[i].DEPE_CANTIDAD_PEDIDO,
-                              0,
-                              0,
-                              0,
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              0
-                          ]);
-                      }
+                            orderDetails1.push([
+                                rows[i].DEPE_CODIGO_EMPRESA, 
+                                7, 
+                                rows[i].DEPE_CODIGO_PEDIDO, 
+                                rows[i].DEPE_CODIGO_PRODUCTO,
+                                rows[i].DEPE_CANTIDAD, 
+                                0, 
+                                "S", 
+                                0, 
+                                "",
+                                "", 
+                                "", 
+                                "", 
+                                "",
+                                "", 
+                                "", 
+                                "", 
+                                "",
+                                "", 
+                                "", 
+                                "", 
+                                "",
+                                "", 
+                                "", 
+                                formatDateToMMDDYYYY_UTC(rows[0].DEPE_FECHA_ENTREGA), 
+                                0,
+                                rows[i].DEPE_CANTIDAD_PEDIDO, 
+                                "", 
+                                0, 
+                                0, 
+                                "", 
+                                "", 
+                                "", 
+                                "", 
+                                "", 
+                                "", 
+                                0
+                            ]);
+                        }
                         
                         // Create the Excel file and download
                         var wb2 = XLSX.utils.book_new();
